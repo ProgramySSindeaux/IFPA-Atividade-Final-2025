@@ -1,0 +1,86 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Consulta de dados Supabase</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+  <!-- Bootstrap 4 CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Shopping List</title>
+  <!-- Bootstrap 4 JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body>
+<div class="container mt-5">
+  <div id="app">
+    <h1>Dados do carrinho</h1>
+    <div v-if="loading">Carregando...</div>
+    <div v-else-if="error">{{ error }}</div>
+    <table v-else-if="dados.length > 0" class="table table-striped">
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Quantidade</th>
+      </tr>
+      <tr v-for="item in dados" :key="item.id">
+        <td>{{ item.id }}</td>
+        <td>{{ item.nome }}</td>
+        <td>{{ item.quant }}</td>
+      </tr>
+    </table>
+    <p v-else>Nenhum dado encontrado.</p>
+  </div>
+</div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        supabaseUrl: 'https://ldwhghwhxxpvdghugemv.supabase.co', // Substitua pela URL do seu projeto
+        supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxkd2hnaHdoeHhwdmRnaHVnZW12Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg4NTQ1ODIsImV4cCI6MjA1NDQzMDU4Mn0.ddKJjbzPJuqbKPzZH3R_5UOwDD9qM9WRd81YF1_72ns', // Substitua pela chave anon do seu projeto
+        
+        tabela: 'carrinho',
+        dados: [],
+        loading: true,
+        error: null
+      },
+      mounted() {
+        this.carregarDados();
+      },
+      methods: {
+        carregarDados() {
+          this.loading = true;
+          this.error = null;
+          $.ajax({
+            url: `${this.supabaseUrl}/rest/v1/${this.tabela}`,
+            type: 'GET',
+            headers: {
+              'apikey': this.supabaseKey,
+              'Authorization': `Bearer ${this.supabaseKey}`
+            },
+            dataType: 'json',
+            success: (data) => {
+              this.dados = data.map(item => ({
+                id: item.id,
+                nome: item.nome,
+                quant: item.quant
+              }));
+            },
+            error: (error) => {
+              console.error('Erro ao consultar dados:', error);
+              this.error = 'Erro ao consultar dados.';
+            },
+            complete: () => {
+              this.loading = false;
+            }
+          });
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Shopping List</title>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center">André Sindeaux <hr>Exemplo: Lista de Compras</h1>
+    <div id="app" class="mt-4">
+      <form v-on:submit.prevent="addItem" class="border p-4 rounded shadow-sm">
+        <div class="form-group">
+          <label for="itemNome">O que você precisa?</label>
+          <input type="text" id="itemNome" class="form-control" required placeholder="Nome do item..." v-model="itemNome">
+        </div>
+        <div class="form-group">
+          <label for="itemQuant">Quantidade?</label>
+          <input type="number" id="itemQuant" class="form-control" placeholder="Número/qtde de itens..." v-model="itemQuant">
+        </div>
+        <button type="submit" class="btn btn-primary mr-2">Adicionar item</button>
+        <button type="button" class="btn btn-secondary" v-on:click="finaliza()">Finalizar</button><br><br>
+        <button type="button" class="btn btn-info" v-on:click="redirectToPage()">Carrinho</button>
+        <button onclick="location.href='/lista-carrinho.html'">Clique aqui para ir para outra página
+      </form>
+      <button type></button>
+      <div class="mt-4">
+        <h4>Lista de compras:</h4>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Nome do Item</th>
+              <th>Quantidade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in shoppingList">
+              <td>{{ item.nome }}</td>
+              <td>{{ item.quant }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const apiUrlCarrinho = 'https://ldwhghwhxxpvdghugemv.supabase.co/rest/v1/carrinho';
+    const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxkd2hnaHdoeHhwdmRnaHVnZW12Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczODg1NDU4MiwiZXhwIjoyMDU0NDMwNTgyfQ.2rAYbIrkdCQDX95bX4-jynvq-5mocKVveirPQDJK_iA';
+    const apiAuthorization = 'Bearer ' + apiKey;
+    const app = Vue.createApp({
+      data() {
+        return {
+          itemNome: null,
+          itemQuant: null,
+          shoppingList: []
+        };
+      },
+      methods: {
+        addItem() {
+          let item = {
+            nome: this.itemNome,
+            quant: this.itemQuant
+          };
+          this.shoppingList.push(item);
+          this.itemNome = null;
+          this.itemQuant = null;
+        },
+        finaliza() {
+          var carrinho = this;
+          $.ajax({
+            type: 'post',
+            url: apiUrlCarrinho,
+            data: JSON.stringify(carrinho.shoppingList),
+            contentType: 'application/json; charset=utf-8',
+            crossDomain: true,
+            headers: {
+              'apikey': apiKey,
+              'Authorization': apiAuthorization,
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type'
+            },
+            success: function(dados, xhr, textStatus) {
+              window.alert("Ok. GRAVADOS " + carrinho.shoppingList.length + " itens.");
+              carrinho.shoppingList = [];
+            },
+            error: (erro) => {
+              window.alert("Ocorreu um erro: " + erro.message);
+            }
+          });
+        },
+        redirectToPage(){
+          window.location.href = '/lista-carrinho.html';// Substitua pelo caminho da página de destino
+        }
+      }
+    });
+    app.mount("#app");
+  </script>
+</body>
+</html>
