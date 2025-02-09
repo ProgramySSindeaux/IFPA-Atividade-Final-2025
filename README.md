@@ -4,6 +4,24 @@
 - André Felipe Sindeaux Sindeaux
 - Vinicus Negrão Pinho
 
+## Hospedagem GitHub Pages
+Foram criados duas hospedagens no GitHub Pages devido a um bug no botão de direcionamento para a pagina carrinho
+A pagina carrinho foi hospedada em um outro projeto no GitHub Pages devido a um bug no codigo que inpedia que o botão direcionasse para pagina carrinho, segue o link da pagina carrinho logo a seguir.
+
+-Parte 1
+https://github.com/ProgramySSindeaux/PT1-IFPA-Atividade-Final-2025
+
+-Parte 2
+https://programyssindeaux.github.io/PT1-IFPA-Atividade-Final-2025/
+
+
+## GitHub
+Parte 1
+https://github.com/ProgramySSindeaux/PT1-IFPA-Atividade-Final-2025/settings/pages
+
+Parte 2
+https://github.com/ProgramySSindeaux/-PT2-IFPA-Atividade-Final-2025
+
 ## Descrição do Projeto
 Este projeto é uma aplicação de página única (SPA) para simular um "Carrinho de Compras" de um site de comércio eletrônico. A aplicação foi desenvolvida utilizando Vue.js e Supabase, e está organizada conforme o padrão MVVM. O layout foi estilizado com Bootstrap para garantir a responsividade.
 
@@ -56,7 +74,7 @@ const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 6.Foi adicionado a função a soma total dos produtos, indicando seu valor a cima e abaixo da Lista de compras
     
 #### Código 2: lista-carrinho
-A pagina carrinho foi hospedada em um outro projeto devido a um bug no codigo que inpedia que o botão direcionasse para pagina carrinho, segue o link da pagina carrinho logo a seguir.
+A pagina carrinho foi hospedada em um outro projeto no GitHub Pages devido a um bug no codigo que inpedia que o botão direcionasse para pagina carrinho, segue o link da pagina carrinho logo a seguir.
 
 https://programyssindeaux.github.io/-PT2-IFPA-Atividade-Final-2025/
 
