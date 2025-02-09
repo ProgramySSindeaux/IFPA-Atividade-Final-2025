@@ -57,6 +57,7 @@ const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
     
 #### Código 2: lista-carrinho
 A pagina carrinho foi hospedada em um outro projeto devido a um bug no codigo que inpedia que o botão direcionasse para pagina carrinho, segue o link da pagina carrinho logo a seguir.
+
 https://programyssindeaux.github.io/-PT2-IFPA-Atividade-Final-2025/
 
 #Chaves de API do projeto#
