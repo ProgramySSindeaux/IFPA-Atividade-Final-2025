@@ -2,6 +2,7 @@
 
 ## Identificação do Aluno
 - André Felipe Sindeaux Sindeaux
+- Vinicus Negrão Pinho
 
 ## Descrição do Projeto
 Este projeto é uma aplicação de página única (SPA) para simular um "Carrinho de Compras" de um site de comércio eletrônico. A aplicação foi desenvolvida utilizando Vue.js e Supabase, e está organizada conforme o padrão MVVM. O layout foi estilizado com Bootstrap para garantir a responsividade.
@@ -50,7 +51,9 @@ const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
     redirectToPage(){
           window.location.href = '/lista-carrinho.html';// Substitua pelo caminho da página de destino
         }
+5.Foi adicionado as colunas Preço por unidade e Ações (Editar & Excluir) para cada item na Lista de compras
 
+6.Foi adicionado a função a soma total dos produtos, indicando seu valor a cima e abaixo da Lista de compras
     
 #### Código 2: lista-carrinho
 #Chaves de API do projeto#
@@ -60,4 +63,8 @@ const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 
 2. Foi adicionado a apiKey (anon  /  public) da API do projeto
     supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxkd2hnaHdoeHhwdmRnaHVnZW12Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg4NTQ1ODIsImV4cCI6MjA1NDQzMDU4Mn0.ddKJjbzPJuqbKPzZH3R_5UOwDD9qM9WRd81YF1_72ns', // Substitua pela chave anon do seu projeto
+
+5.Foi adicionado as colunas Preço por unidade e Ações (Editar & Excluir) para cada item que está no carrinho
+
+6.Foi adicionado a função a soma total dos produtos, indicando seu valor a cima e abaixo que está no carrinho
         
