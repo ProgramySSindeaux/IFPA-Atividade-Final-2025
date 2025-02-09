@@ -17,7 +17,7 @@ https://programyssindeaux.github.io/-PT2-IFPA-Atividade-Final-2025/
 
 ## GitHub
 -Parte 1
-https://github.com/ProgramySSindeaux/PT1-IFPA-Atividade-Final-2025/settings/pages
+https://github.com/ProgramySSindeaux/PT1-IFPA-Atividade-Final-2025
 
 -Parte 2
 https://github.com/ProgramySSindeaux/-PT2-IFPA-Atividade-Final-2025
