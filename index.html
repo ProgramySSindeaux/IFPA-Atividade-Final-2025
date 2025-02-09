@@ -29,7 +29,9 @@
         <button type="submit" class="btn btn-primary mr-2">Adicionar item</button>
         <button type="button" class="btn btn-secondary" v-on:click="finaliza()">Finalizar</button><br><br>
         <button type="button" class="btn btn-info" v-on:click="redirectToPage()">Carrinho</button><br><br>
-        <h4>Total: {{ total }}</h4> <!-- Exibir o valor total -->
+        <div v-if="total !== null">
+      <h4>Total: {{ total }}</h4>
+    </div>
       </form>
       <div class="mt-4">
         <h4>Lista de compras:</h4>
@@ -61,7 +63,9 @@
             </tr>
           </tbody>
         </table>
-        <h4>Total: {{ total }}</h4> <!-- Exibir o valor total -->
+        <div v-if="total !== null">
+      <h4>Total: {{ total }}</h4>
+    </div>
       </div>
     </div>
   </div>
