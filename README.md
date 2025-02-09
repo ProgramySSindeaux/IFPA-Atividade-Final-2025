@@ -56,6 +56,9 @@ const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 6.Foi adicionado a função a soma total dos produtos, indicando seu valor a cima e abaixo da Lista de compras
     
 #### Código 2: lista-carrinho
+A pagina carrinho foi hospedada em um outro projeto devido a um bug no codigo que inpedia que o botão direcionasse para pagina carrinho, segue o link da pagina carrinho logo abaixo.
+https://programyssindeaux.github.io/-PT2-IFPA-Atividade-Final-2025/
+
 #Chaves de API do projeto#
 
 1. Foi adicinado no código lista-carrinho o URL do projeto no Supabase que direciona para o projeto shoppingList(lista de compras), a tabela carrinho foi pré-definho dentro do código vue.js desta forma o trecho:"co/rest/v1/carrinho" é removido.
