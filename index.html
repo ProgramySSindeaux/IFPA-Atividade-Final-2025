@@ -63,9 +63,7 @@
             </tr>
           </tbody>
         </table>
-        <div v-if="total !== null">
-          <h4>Total: {{ total }}</h4>
-        </div>
+        <h4>Total: {{ total }}</h4> <!-- Exibir o valor total -->
       </div>
     </div>
   </div>
@@ -90,8 +88,8 @@
         addItem() {
           let item = {
             nome: this.itemNome,
-            quant: this.itemQuant,
-            preco: this.itemPreco
+            quant: parseFloat(this.itemQuant) || 0,
+            preco: parseFloat(this.itemPreco) || 0
           };
           this.shoppingList.push(item);
           this.itemNome = null;
@@ -129,7 +127,11 @@
           this.editItem = { ...item };
         },
         saveEdit(index) {
-          this.shoppingList[index] = { ...this.editItem };
+          this.shoppingList[index] = {
+            nome: this.editItem.nome,
+            quant: parseFloat(this.editItem.quant) || 0,
+            preco: parseFloat(this.editItem.preco) || 0
+          };
           this.editIndex = null;
           this.editItem = { nome: '', quant: 0, preco: 0 };
           this.calcularTotal(); // Calcular o total após salvar a edição
@@ -143,10 +145,14 @@
           this.calcularTotal(); // Calcular o total após excluir um item
         },
         calcularTotal() {
-          this.total = this.shoppingList.reduce((sum, item) => sum + (item.quant * item.preco), 0);
+          this.total = this.shoppingList.reduce((sum, item) => {
+            const quant = parseFloat(item.quant) || 0; // Converte para número ou 0 se for inválido
+            const preco = parseFloat(item.preco) || 0; // Converte para número ou 0 se for inválido
+            return sum + (quant * preco);
+          }, 0);
         },
         redirectToPage(){
-          window.location.href = '/lista-carrinho.html'; // Substitua pelo caminho da página de destino
+          window.location.href = '/lista-carrinho.html';// Substitua pelo caminho da página de destino
         }
       }
     });
@@ -154,5 +160,3 @@
   </script>
 </body>
 </html>
-
-
