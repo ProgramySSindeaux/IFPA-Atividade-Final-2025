@@ -7,11 +7,10 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <title>Shopping List</title>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-
 </head>
 <body>
   <div class="container mt-5">
-    <h1 class="text-center">André Sindeaux <hr>Exemplo: Lista de Compras</h1>
+    <h1 class="text-center">André Sindeaux<hr>Vinicius Negrão Pinho<hr>Exemplo: Lista de Compras</h1>
     <div id="app" class="mt-4">
       <form v-on:submit.prevent="addItem" class="border p-4 rounded shadow-sm">
         <div class="form-group">
@@ -22,11 +21,16 @@
           <label for="itemQuant">Quantidade?</label>
           <input type="number" id="itemQuant" class="form-control" placeholder="Número/qtde de itens..." v-model="itemQuant">
         </div>
+        <div class="form-group">
+          <label for="itemPreco">Preço por unidade?</label>
+          <input type="float" id="itemQuant" class="form-control" placeholder="Preço por unidade..." v-model="itemPreco">
+        </div>
+
         <button type="submit" class="btn btn-primary mr-2">Adicionar item</button>
         <button type="button" class="btn btn-secondary" v-on:click="finaliza()">Finalizar</button><br><br>
-        <button type="button" class="btn btn-info" v-on:click="redirectToPage()">Carrinho</button>
+        <button type="button" class="btn btn-info" v-on:click="redirectToPage()">Carrinho</button><br><br>
+        <h4>Total: {{ total }}</h4> <!-- Exibir o valor total -->
       </form>
-      <button type></button>
       <div class="mt-4">
         <h4>Lista de compras:</h4>
         <table class="table table-striped">
@@ -34,15 +38,30 @@
             <tr>
               <th>Nome do Item</th>
               <th>Quantidade</th>
+              <th>Preço por unidade</th>
+              <th>Ações</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in shoppingList">
-              <td>{{ item.nome }}</td>
-              <td>{{ item.quant }}</td>
+            <tr v-for="(item, index) in shoppingList" :key="index">
+              <td v-if="editIndex !== index">{{ item.nome }}</td>
+              <td v-else><input type="text" v-model="editItem.nome" class="form-control"></td>
+              <td v-if="editIndex !== index">{{ item.quant }}</td>
+              <td v-else><input type="number" v-model="editItem.quant" class="form-control"></td>
+              <td v-if="editIndex !== index">{{ item.preco }}</td>
+              <td v-else><input type="number" v-model="editItem.preco" class="form-control"></td>
+              <td v-if="editIndex !== index">
+                <button @click="startEditing(index, item)" class="btn btn-sm btn-warning me-2">Editar</button>
+                <button @click="excluirProduto(index)" class="btn btn-sm btn-danger ms-2">Excluir</button>
+              </td>
+              <td v-else>
+                <button @click="saveEdit(index)" class="btn btn-sm btn-success me-2">Salvar</button>
+                <button @click="cancelEdit" class="btn btn-sm btn-secondary ms-2">Cancelar</button>
+              </td>
             </tr>
           </tbody>
         </table>
+        <h4>Total: {{ total }}</h4> <!-- Exibir o valor total -->
       </div>
     </div>
   </div>
@@ -56,18 +75,25 @@
         return {
           itemNome: null,
           itemQuant: null,
-          shoppingList: []
+          itemPreco: null,
+          shoppingList: [],
+          total: 0,
+          editIndex: null,
+          editItem: { nome: '', quant: 0, preco: 0 } // Inicialize editItem
         };
       },
       methods: {
         addItem() {
           let item = {
             nome: this.itemNome,
-            quant: this.itemQuant
+            quant: this.itemQuant,
+            preco: this.itemPreco
           };
           this.shoppingList.push(item);
           this.itemNome = null;
           this.itemQuant = null;
+          this.itemPreco = null;
+          this.calcularTotal(); // Calcular o total após adicionar um item
         },
         finaliza() {
           var carrinho = this;
@@ -87,14 +113,36 @@
             success: function(dados, xhr, textStatus) {
               window.alert("Ok. GRAVADOS " + carrinho.shoppingList.length + " itens.");
               carrinho.shoppingList = [];
+              carrinho.total = 0; // Resetar o total após finalizar a compra
             },
             error: (erro) => {
               window.alert("Ocorreu um erro: " + erro.message);
             }
           });
         },
+        startEditing(index, item) {
+          this.editIndex = index;
+          this.editItem = { ...item };
+        },
+        saveEdit(index) {
+          this.shoppingList[index] = { ...this.editItem };
+          this.editIndex = null;
+          this.editItem = { nome: '', quant: 0, preco: 0 };
+          this.calcularTotal(); // Calcular o total após salvar a edição
+        },
+        cancelEdit() {
+          this.editIndex = null;
+          this.editItem = {};
+        },
+        excluirProduto(index) {
+          this.shoppingList.splice(index, 1);
+          this.calcularTotal(); // Calcular o total após excluir um item
+        },
+        calcularTotal() {
+          this.total = this.shoppingList.reduce((sum, item) => sum + (item.quant * item.preco), 0);
+        },
         redirectToPage(){
-          window.location.href = 'https://programyssindeaux.github.io/-PT2-IFPA-Atividade-Final-2025/';// Substitua pelo caminho da página de destino
+          window.location.href = '/lista-carrinho.html';// Substitua pelo caminho da página de destino
         }
       }
     });
