@@ -23,7 +23,7 @@
         </div>
         <div class="form-group">
           <label for="itemPreco">Preço por unidade?</label>
-          <input type="float" id="itemPreco" class="form-control" placeholder="Preço por unidade..." v-model="itemPreco">
+          <input type="number" id="itemPreco" class="form-control" placeholder="Preço por unidade..." v-model="itemPreco">
         </div>
 
         <button type="submit" class="btn btn-primary mr-2">Adicionar item</button>
@@ -51,7 +51,7 @@
               <td v-if="editIndex !== index">{{ item.quant }}</td>
               <td v-else><input type="number" v-model="editItem.quant" class="form-control"></td>
               <td v-if="editIndex !== index">{{ item.preco }}</td>
-              <td v-else><input type="float" v-model="editItem.preco" class="form-control"></td>
+              <td v-else><input type="number" v-model="editItem.preco" class="form-control"></td>
               <td v-if="editIndex !== index">
                 <button @click="startEditing(index, item)" class="btn btn-sm btn-warning me-2">Editar</button>
                 <button @click="excluirProduto(index)" class="btn btn-sm btn-danger ms-2">Excluir</button>
@@ -146,7 +146,7 @@
           this.total = this.shoppingList.reduce((sum, item) => sum + (item.quant * item.preco), 0);
         },
         redirectToPage(){
-          window.location.href = 'https://programyssindeaux.github.io/-PT2-IFPA-Atividade-Final-2025/'; // Substitua pelo caminho da página de destino
+          window.location.href = '/lista-carrinho.html'; // Substitua pelo caminho da página de destino
         }
       }
     });
@@ -154,4 +154,5 @@
   </script>
 </body>
 </html>
+
 
