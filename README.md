@@ -9,10 +9,10 @@ Foram criados duas hospedagens no GitHub Pages devido a um bug no botão de dire
 A pagina carrinho foi hospedada em um outro projeto no GitHub Pages devido a um bug no codigo que inpedia que o botão direcionasse para pagina carrinho, segue o link da pagina carrinho logo a seguir.
 
 -Parte 1
-https://github.com/ProgramySSindeaux/PT1-IFPA-Atividade-Final-2025
+https://programyssindeaux.github.io/PT1-IFPA-Atividade-Final-2025/
 
 -Parte 2
-https://programyssindeaux.github.io/PT1-IFPA-Atividade-Final-2025/
+https://programyssindeaux.github.io/-PT2-IFPA-Atividade-Final-2025/
 
 
 ## GitHub
