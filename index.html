@@ -51,7 +51,7 @@
               <td v-if="editIndex !== index">{{ item.quant }}</td>
               <td v-else><input type="number" v-model="editItem.quant" class="form-control"></td>
               <td v-if="editIndex !== index">{{ item.preco }}</td>
-              <td v-else><input type="number" v-model="editItem.preco" class="form-control"></td>
+              <td v-else><input type="float" v-model="editItem.preco" class="form-control"></td>
               <td v-if="editIndex !== index">
                 <button @click="startEditing(index, item)" class="btn btn-sm btn-warning me-2">Editar</button>
                 <button @click="excluirProduto(index)" class="btn btn-sm btn-danger ms-2">Excluir</button>
